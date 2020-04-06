@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CnC_Server
+namespace Server.CnC_Server
 {
     public class Server
     {

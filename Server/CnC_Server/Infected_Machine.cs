@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CnC_Server
+namespace Server.CnC_Server
 {
     public class Infected_Machine
     {
