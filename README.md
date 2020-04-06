@@ -1,29 +1,14 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* To give basic guidelines and basic solution for the exercise written in C#.
 
-### How do I get set up? ###
+### Who is this repository for? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+* Trainers who are about to tutor the C&C exercise on C#.
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Repo owner - Amiel Refaeli.
+* Other trainers with experience tutoring this exercise.
