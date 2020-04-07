@@ -43,7 +43,7 @@ namespace CnC_Server.Options
         /// <summary>
         /// No arguments to the "print bots" option and therefore return true always
         /// </summary>
-        public bool ParseArguments(String arguments)
+        public bool ParseArguments(string[] arguments)
         {
             return true;
         }

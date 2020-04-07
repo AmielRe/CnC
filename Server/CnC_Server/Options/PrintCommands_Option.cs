@@ -44,7 +44,7 @@ namespace CnC_Server.Options
         /// <summary>
         /// No arguments to the "print commands" option and therefore return true always
         /// </summary>
-        public bool ParseArguments(string arguments)
+        public bool ParseArguments(string[] arguments)
         {
             return true;
         }

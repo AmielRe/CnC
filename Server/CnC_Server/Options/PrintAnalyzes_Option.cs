@@ -18,7 +18,7 @@ namespace CnC_Server.Options
             this.Analyzes = analyzes;
         }
 
-        public bool ParseArguments(string arguments)
+        public bool ParseArguments(string[] arguments)
         {
             return true;
         }
