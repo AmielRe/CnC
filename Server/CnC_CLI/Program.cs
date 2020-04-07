@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Server.CnC_Server;
 
 namespace Server.CnC_CLI
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

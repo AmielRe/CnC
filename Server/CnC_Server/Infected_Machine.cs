@@ -8,7 +8,7 @@ namespace Server.CnC_Server
     {
         private readonly static List<string> validDataNames = new List<string> { "ram", "processes" };
 
-        private readonly string ip;
+        public readonly string ip;
         private readonly int port;
         private Dictionary<string, double> data;
 
