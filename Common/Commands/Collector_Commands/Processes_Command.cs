@@ -3,14 +3,15 @@ using System;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Common.Commands.Collector_Commands
 {
     [Serializable]
     [CommandName("processes")]
-    public class Processes_Command : Command
+    public class Processes_Command : Collector
     {
-        public void execute(Socket sendTo)
+        public void Execute(Socket sendTo)
         {
             try
             {
@@ -23,18 +24,9 @@ namespace Common.Commands.Collector_Commands
             }
         }
 
-        public void printDescription()
+        public void PrintDescription()
         {
             Console.WriteLine("This plugin will return the number of running processes on infected machine");
         }
-
-        #region Serializable
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

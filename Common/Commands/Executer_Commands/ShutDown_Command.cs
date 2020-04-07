@@ -8,9 +8,9 @@ namespace Common.Commands.Executer_Commands
 {
     [Serializable]
     [CommandName("shutdown")]
-    public class ShutDown_Command : Command
+    public class ShutDown_Command : Executer
     {
-        public void execute(Socket sendTo)
+        public void Execute(Socket sendTo)
         {
             try
             {
@@ -22,18 +22,9 @@ namespace Common.Commands.Executer_Commands
             }
         }
 
-        public void printDescription()
+        public void PrintDescription()
         {
             Console.WriteLine("This plugin will shut down the infected machine");
         }
-
-        #region Serializable
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Net.Sockets;
 
-namespace Common.Commands
+namespace Common.Commands.Collector_Commands
 {
-    public interface Command
+    public interface Collector : Command
     {
         void Execute(Socket sendTo);
         void PrintDescription();

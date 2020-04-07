@@ -9,9 +9,9 @@ namespace Common.Commands.Collector_Commands
 {
     [Serializable]
     [CommandName("ram")]
-    public class Ram_Command : Command
+    public class Ram_Command : Collector
     {
-        public void execute(Socket sendTo)
+        public void Execute(Socket sendTo)
         {
             try
             {
@@ -37,18 +37,9 @@ namespace Common.Commands.Collector_Commands
             }
         }
 
-        public void printDescription()
+        public void PrintDescription()
         {
             Console.WriteLine("This plugin will return the RAM consumption on infected machine");
         }
-
-        #region Serializable
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
