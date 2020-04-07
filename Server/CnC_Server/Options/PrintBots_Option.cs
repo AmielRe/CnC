@@ -37,7 +37,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This option will print a list of IPs of all bots and the Identifier of each bot. FORMAT: print bots");
+            Console.WriteLine("This option will print a list of IPs of all bots and the Identifier of each bot. FORMAT: print-bots");
         }
 
         /// <summary>

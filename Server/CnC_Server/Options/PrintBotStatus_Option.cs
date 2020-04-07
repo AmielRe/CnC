@@ -54,7 +54,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This command will print all the information from the specific bot saved locally on the server. FORMAT: print bot-analysis <bot id>");
+            Console.WriteLine("This option will print all the information from the specific bot saved locally on the server. FORMAT: print bot-status <bot id>");
         }
 
         public bool ParseArguments(string arguments)
