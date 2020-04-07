@@ -7,9 +7,9 @@ namespace Common.Commands.Executer_Commands
 {
     [Serializable]
     [CommandName("kill")]
-    public class Kill_Command : Command
+    public class Kill_Command : Executer
     {
-        public void execute(Socket sendTo)
+        public void Execute(Socket sendTo)
         {
             try
             {
@@ -21,18 +21,9 @@ namespace Common.Commands.Executer_Commands
             }
         }
 
-        public void printDescription()
+        public void PrintDescription()
         {
             Console.WriteLine("This plugin will make the infected machine kill itself");
         }
-
-        #region Serializable
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

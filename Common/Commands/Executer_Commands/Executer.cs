@@ -1,8 +1,8 @@
 ﻿using System.Net.Sockets;
 
-namespace Common.Commands
+namespace Common.Commands.Executer_Commands
 {
-    public interface Command
+    public interface Executer : Command
     {
         void Execute(Socket sendTo);
         void PrintDescription();

