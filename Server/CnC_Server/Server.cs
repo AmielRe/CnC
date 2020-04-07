@@ -155,13 +155,20 @@ namespace Server.CnC_Server
 
         private void runOption(string optionName, string[] arguments)
         {
-            if (Options[optionName].ParseArguments(arguments))
+            try
             {
-                Options[optionName].Run();
+                if (Options[optionName].ParseArguments(arguments))
+                {
+                    Options[optionName].Run();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid use of the selected option!");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                Console.WriteLine("Invalid use of the selected option!");
+                Console.WriteLine("Error while executing selected option.\n{0}", ex.ToString());
             }
         }
     }

