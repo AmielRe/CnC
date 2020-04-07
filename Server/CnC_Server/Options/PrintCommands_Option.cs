@@ -38,7 +38,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This command will print a list of all the possible commands the server can execute - name of command and what it does. FORMAT: print commands");
+            Console.WriteLine("This option will print a list of all the possible commands the server can execute - name of command and what it does. FORMAT: print-commands");
         }
 
         /// <summary>
