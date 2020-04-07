@@ -56,7 +56,7 @@ namespace CnC_Bot
                 Listen();
                 while (true)
                 {
-                    Recv_Plugin();
+                    Recv_Command();
                 }
             }
         }

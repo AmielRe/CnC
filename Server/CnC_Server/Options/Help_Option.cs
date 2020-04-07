@@ -22,7 +22,7 @@ namespace CnC_Server.Options
         /// No arguments to the "help" option and therefore return true always
         /// </summary>
         /// <returns>True always</returns>
-        public bool ParseArguments(string arguments)
+        public bool ParseArguments(string[] arguments)
         {
             return true;
         }

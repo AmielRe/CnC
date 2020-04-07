@@ -20,16 +20,14 @@ namespace CnC_Server.Options
             this.Analyzes = analyzes;
         }
 
-        public bool ParseArguments(string arguments)
+        public bool ParseArguments(string[] arguments)
         {
-            if (arguments.Length > 0 && arguments.Contains(" "))
+            if (arguments.Length == 2 && Analyzes.ContainsKey(arguments[0]))
             {
-                String[] splitArguments = arguments.Split(' ');
-                if (splitArguments.Length == 2 && Analyzes.ContainsKey(splitArguments[0]))
-                {
-                    SetAnalysisName(splitArguments[0]);
-                    SetParam(double.Parse(splitArguments[1]));
-                }
+                SetAnalysisName(arguments[0]);
+                SetParam(double.Parse(arguments[1]));
+
+                return true;
             }
 
             return false;
