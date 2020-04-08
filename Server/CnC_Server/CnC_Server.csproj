@@ -45,12 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzes\Analysis.cs" />
+    <Compile Include="Analyzes\Processes_Analyzes\NumberOfProcessesLowerThen_Analysis.cs" />
+    <Compile Include="Analyzes\Ram_Analyzes\RamConsumptionLowerThen_Analysis.cs" />
     <Compile Include="Infected_Machine.cs" />
+    <Compile Include="Options\Execute_Option.cs" />
+    <Compile Include="Options\Help_Option.cs" />
+    <Compile Include="Options\Option.cs" />
+    <Compile Include="Options\PrintAnalyzes_Option.cs" />
+    <Compile Include="Options\PrintBotAnalysis_Option.cs" />
+    <Compile Include="Options\PrintBotStatus_Option.cs" />
+    <Compile Include="Options\PrintBots_Option.cs" />
+    <Compile Include="Options\PrintCommands_Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{3610fd55-8b9e-4136-9823-aade90b991b5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

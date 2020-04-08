@@ -32,7 +32,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This option will print the help menu. FORMAT: help");
+            Console.WriteLine("This option will print the help menu. FORMAT: help\n");
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace CnC_Server.Options
             
             foreach(KeyValuePair<string, Option> Entry in AvailableOptions)
             {
-                Console.Write(String.Format("{0} - ", Entry.Key));
+                Console.Write(String.Format("* {0} - ", Entry.Key));
                 Entry.Value.PrintDescription();
             }
         }

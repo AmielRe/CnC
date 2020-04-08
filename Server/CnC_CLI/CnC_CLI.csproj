@@ -42,8 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Options\Option.cs" />
-    <Compile Include="Options\Help_Option.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{3610FD55-8B9E-4136-9823-AADE90B991B5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CnC_Server\CnC_Server.csproj">
       <Project>{87af4866-6fc7-41fa-a597-1e495928d481}</Project>
       <Name>CnC_Server</Name>

@@ -28,8 +28,8 @@ namespace CnC_Server.Options
 
             foreach (KeyValuePair<string, Command> Entry in Commands)
             {
-                Console.Write(String.Format("{0} - ", Entry.Key));
-                Entry.Value.printDescription();
+                Console.Write(String.Format("* {0} - ", Entry.Key));
+                Entry.Value.PrintDescription();
             }
         }
 
@@ -38,7 +38,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This option will print a list of all the possible commands the server can execute - name of command and what it does. FORMAT: print-commands");
+            Console.WriteLine("This option will print a list of all the possible commands the server can execute - name of command and what it does. FORMAT: print-commands\n");
         }
 
         /// <summary>

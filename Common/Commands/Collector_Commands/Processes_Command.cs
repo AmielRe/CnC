@@ -16,7 +16,7 @@ namespace Common.Commands.Collector_Commands
             try
             {
                 double runningProcesses = Process.GetProcesses().Length;
-                sendTo.Send(System.Convert.FromBase64String(String.Format("{0}", runningProcesses)));
+                sendTo.Send(BitConverter.GetBytes(runningProcesses));
             }
             catch(Exception ex)
             {

@@ -10,7 +10,7 @@ namespace Server.CnC_CLI
     {
         static void Main(string[] args)
         {
-            CnC_Server.Server BotMaster = new CnC_Server.Server(12345);
+            CnC_Server.Server BotMaster = new CnC_Server.Server(8425);
             BotMaster.Start();
         }
     }
