@@ -24,13 +24,13 @@ namespace Server.CnC_Server
 
         private static List<Infected_Machine> Bots = new List<Infected_Machine>();
 
-        private static Dictionary<string, Analysis> Analyzes = new Dictionary<string, Analysis>
+        private static Dictionary<string, Analysis> Analyzes = new Dictionary<string, Analysis>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<AnalysisNameAttribute>(typeof(NumberOfProcessesLowerThen_Analysis)).AnalysisName, new NumberOfProcessesLowerThen_Analysis() },
             { ReflectionExtensions.GetAttribute<AnalysisNameAttribute>(typeof(RamConsumptionLowerThen_Analysis)).AnalysisName, new RamConsumptionLowerThen_Analysis() }
         };
 
-        private static Dictionary<string, Command> Commands = new Dictionary<string, Command>
+        private static Dictionary<string, Command> Commands = new Dictionary<string, Command>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<CommandNameAttribute>(typeof(Kill_Command)).CommandName, new Kill_Command() },
             { ReflectionExtensions.GetAttribute<CommandNameAttribute>(typeof(ShutDown_Command)).CommandName, new ShutDown_Command() },
@@ -38,7 +38,7 @@ namespace Server.CnC_Server
             { ReflectionExtensions.GetAttribute<CommandNameAttribute>(typeof(Ram_Command)).CommandName, new Ram_Command() }
         };
 
-        private static Dictionary<string, Option> Options = new Dictionary<string, Option>
+        private static Dictionary<string, Option> Options = new Dictionary<string, Option>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintBots_Option)).OptionName, new PrintBots_Option(Bots) },
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintCommands_Option)).OptionName, new PrintCommands_Option(Commands) },
@@ -75,9 +75,9 @@ namespace Server.CnC_Server
 
                 while (!CurrentOption.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
                 {
+                    parseOption(CurrentOption);
                     Console.Write("\n>>> ");
                     CurrentOption = Console.ReadLine();
-                    parseOption(CurrentOption);
                 }
             }
             catch(Exception)
