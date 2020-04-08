@@ -29,7 +29,7 @@ namespace CnC_Server.Options
             foreach (KeyValuePair<string, Command> Entry in Commands)
             {
                 Console.Write(String.Format("{0} - ", Entry.Key));
-                Entry.Value.printDescription();
+                Entry.Value.PrintDescription();
             }
         }
 

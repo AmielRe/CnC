@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnC_CLI", "Server\CnC_CLI\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3610FD55-8B9E-4136-9823-AADE90B991B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bot", "Bot", "{C98C88F3-B5EA-4E7D-B3BE-0DD712DB70E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnC_Bot", "Bot\CnC_Bot\CnC_Bot.csproj", "{6987C336-54E4-4267-96C7-F2FF78F8DF3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{3610FD55-8B9E-4136-9823-AADE90B991B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3610FD55-8B9E-4136-9823-AADE90B991B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3610FD55-8B9E-4136-9823-AADE90B991B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6987C336-54E4-4267-96C7-F2FF78F8DF3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6987C336-54E4-4267-96C7-F2FF78F8DF3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6987C336-54E4-4267-96C7-F2FF78F8DF3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6987C336-54E4-4267-96C7-F2FF78F8DF3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{87AF4866-6FC7-41FA-A597-1E495928D481} = {A49E6E2A-E606-4671-8BB4-6659E0504306}
 		{4668402F-C719-48EB-8E49-FCFB72B61ECF} = {A49E6E2A-E606-4671-8BB4-6659E0504306}
+		{6987C336-54E4-4267-96C7-F2FF78F8DF3F} = {C98C88F3-B5EA-4E7D-B3BE-0DD712DB70E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {391787A7-E61D-41E6-BB0D-6E4E8E59DD91}

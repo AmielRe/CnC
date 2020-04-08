@@ -11,7 +11,7 @@ namespace CnC_Bot
         static void Main(string[] args)
         {
             Bot CnC_Bot = new Bot();
-            CnC_Bot.Start("127.0.0.1", 8425);
+            CnC_Bot.Start("192.168.43.128", 8425);
         }
     }
 }
