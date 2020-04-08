@@ -57,7 +57,7 @@ namespace CnC_Server.Options
 
         public void PrintDescription()
         {
-            Console.WriteLine("This option will execute the requested command on all bots or on specific bot and will save the data for further analysis. FORMAT: execute <name of command> <bot id> (no bot id given = all bots)");
+            Console.WriteLine("This option will execute the requested command on all bots or on specific bot and will save the data for further analysis. FORMAT: execute <name of command> <bot id> (no bot id given = all bots)\n");
         }
 
         public void Run()
@@ -112,7 +112,7 @@ namespace CnC_Server.Options
                     tcpClient.GetStream().Read(response, 0, response.Length); // Get the result of the command execution from the bot
 
                     // Update the locally saved data to the result received from the command
-                    if (!Bots[(int)botID].SetNewValue(CommandName, double.Parse(Convert.ToBase64String(response))))
+                    if (!Bots[(int)botID].SetNewValue(CommandName, BitConverter.ToDouble(response,0)))
                     {
                         Console.WriteLine("Error setting the new value returned!");
                     }

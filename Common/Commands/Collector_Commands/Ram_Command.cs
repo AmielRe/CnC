@@ -29,7 +29,7 @@ namespace Common.Commands.Collector_Commands
                     percent = ((memoryValues.TotalVisibleMemorySize - memoryValues.FreePhysicalMemory) / memoryValues.TotalVisibleMemorySize) * 100;
                 }
 
-                sendTo.Send(System.Convert.FromBase64String(String.Format("{0}", percent)));
+                sendTo.Send(BitConverter.GetBytes(percent));
             }
             catch(Exception ex)
             {
