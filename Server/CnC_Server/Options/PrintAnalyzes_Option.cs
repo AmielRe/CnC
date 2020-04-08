@@ -25,7 +25,7 @@ namespace CnC_Server.Options
 
         public void PrintDescription()
         {
-            Console.WriteLine("This option will print a list of all the possible analysis the server can execute - name of analysis and what it does. FORMAT: print-analyzes");
+            Console.WriteLine("This option will print a list of all the possible analysis the server can execute - name of analysis and what it does. FORMAT: print-analyzes\n");
         }
 
         public void Run()
@@ -38,7 +38,7 @@ namespace CnC_Server.Options
 
             foreach (KeyValuePair<string, Analysis> Entry in Analyzes)
             {
-                Console.Write(String.Format("{0} - ", Entry.Key));
+                Console.Write(String.Format("* {0} - ", Entry.Key));
                 Entry.Value.printDescription();
             }
         }

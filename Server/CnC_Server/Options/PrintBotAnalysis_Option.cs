@@ -35,7 +35,7 @@ namespace CnC_Server.Options
 
         public void PrintDescription()
         {
-            Console.WriteLine("This option will run an analysis (on the data you have locally) and print bots who match this analysis (IP and ID). FORMAT: print-bot-analysis <name of analysis> <param>");
+            Console.WriteLine("This option will run an analysis (on the data you have locally) and print bots who match this analysis (IP and ID). FORMAT: print-bot-analysis <name of analysis> <param>\n");
         }
 
         public void Run()
