@@ -42,6 +42,7 @@ namespace CnC_Server.Options
         {
             Console.WriteLine("\nHello and welcome to the C&C server!\n\nAvailable options:\n");
             
+            // Go through each option and print the description
             foreach(KeyValuePair<string, Option> Entry in AvailableOptions)
             {
                 Console.Write(String.Format("* {0} - ", Entry.Key));

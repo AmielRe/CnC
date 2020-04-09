@@ -9,6 +9,9 @@ namespace Common.Commands.Executer_Commands
     [CommandName("kill")]
     public class Kill_Command : Executer
     {
+        // <summary>
+        /// Execute the kill command
+        /// </summary>
         public void Execute(Socket sendTo)
         {
             try
@@ -21,9 +24,12 @@ namespace Common.Commands.Executer_Commands
             }
         }
 
+        /// <summary>
+        /// Print the command description (what it does)
+        /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This plugin will make the infected machine kill itself");
+            Console.WriteLine("This command will make the infected machine kill itself");
         }
     }
 }

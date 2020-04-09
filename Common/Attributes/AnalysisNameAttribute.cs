@@ -11,11 +11,13 @@ namespace Common.Attributes
     {
         readonly string _analysisName;
 
+        // Set the analysis name
         public AnalysisNameAttribute(string analysisName)
         {
             this._analysisName = analysisName;
         }
 
+        // Return the analysis name
         public string AnalysisName
         {
             get { return this._analysisName; }

