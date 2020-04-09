@@ -16,7 +16,7 @@ namespace CnC_Server.Options
         }
 
         /// <summary>
-        /// Run the print commands option
+        /// Run the print-commands option
         /// </summary>
         public void Run()
         {
@@ -26,6 +26,7 @@ namespace CnC_Server.Options
                 return;
             }
 
+            // Go through each command in the dictionary and print the description
             foreach (KeyValuePair<string, Command> Entry in Commands)
             {
                 Console.Write(String.Format("* {0} - ", Entry.Key));
@@ -34,7 +35,7 @@ namespace CnC_Server.Options
         }
 
         /// <summary>
-        /// Describe what the "print commands" option does
+        /// Describe what the "print-commands" option does
         /// </summary>
         public void PrintDescription()
         {
@@ -44,6 +45,7 @@ namespace CnC_Server.Options
         /// <summary>
         /// No arguments to the "print commands" option and therefore return true always
         /// </summary>
+        /// <returns>True always</returns>
         public bool ParseArguments(string[] arguments)
         {
             return true;

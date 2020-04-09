@@ -8,16 +8,25 @@ namespace CnC_Server.Analyzes.Ram_Analyzes
     [AnalysisName("RamLowerThen")]
     public class RamConsumptionLowerThen_Analysis : Analysis
     {
-        public void printDescription()
+        /// <summary>
+        /// Print the analysis description (what it does)
+        /// </summary>
+        public void PrintDescription()
         {
             Console.WriteLine("This analysis will analyze current RAM data by the received parameter");
         }
 
-        public void run(List<Infected_Machine> bots, double paramToCompare)
+        /// <summary>
+        /// Run the analysis on the received bots and param.
+        /// </summary>
+        /// <param name="bots">The bots list to check the analysis on</param>
+        /// <param name="paramToCompare">The param to do the analysis on</param>
+        public void Run(List<Infected_Machine> bots, double paramToCompare)
         {
             bool botPrinted = false;
 
-            for(int i = 0; i < bots.Count; i++)
+            // Go through every bot in the list and do the analysis
+            for (int i = 0; i < bots.Count; i++)
             {
                 if(!double.IsNaN(bots[i].GetValueByName("ram"))
                     && bots[i].GetValueByName("ram") < paramToCompare)

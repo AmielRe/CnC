@@ -10,6 +10,7 @@ namespace Server.CnC_CLI
     {
         static void Main(string[] args)
         {
+            // Start the server on port 8425
             CnC_Server.Server BotMaster = new CnC_Server.Server(8425);
             BotMaster.Start();
         }

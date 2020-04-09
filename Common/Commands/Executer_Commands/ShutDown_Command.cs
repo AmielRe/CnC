@@ -10,6 +10,9 @@ namespace Common.Commands.Executer_Commands
     [CommandName("shutdown")]
     public class ShutDown_Command : Executer
     {
+        // <summary>
+        /// Execute the shutdown command
+        /// </summary>
         public void Execute(Socket sendTo)
         {
             try
@@ -22,9 +25,12 @@ namespace Common.Commands.Executer_Commands
             }
         }
 
+        /// <summary>
+        /// Print the command description (what it does)
+        /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This plugin will shut down the infected machine");
+            Console.WriteLine("This command will shut down the infected machine");
         }
     }
 }

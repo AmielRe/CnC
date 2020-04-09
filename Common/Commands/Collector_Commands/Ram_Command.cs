@@ -11,6 +11,10 @@ namespace Common.Commands.Collector_Commands
     [CommandName("ram")]
     public class Ram_Command : Collector
     {
+        /// <summary>
+        /// Execute the ram command and return the value through the socket
+        /// </summary>
+        /// <param name="sendTo">The socket to send the data to</param>
         public void Execute(Socket sendTo)
         {
             try
@@ -37,9 +41,12 @@ namespace Common.Commands.Collector_Commands
             }
         }
 
+        /// <summary>
+        /// Print the command description (what it does)
+        /// </summary>
         public void PrintDescription()
         {
-            Console.WriteLine("This plugin will return the RAM consumption on infected machine");
+            Console.WriteLine("This command will return the RAM consumption on infected machine");
         }
     }
 }
